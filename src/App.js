@@ -1,23 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect } from 'react'
+import server from './api/server'
+import pokeAPI from './api/pokeAPI'
+import Keyboard from './components/Keyboard'
+import GuessGrid from './components/GuessGrid'
 
-function App() {
+const App = () => {
+  
+  const [ pokemon, setPokemon ] = useState('')
+
+  const fetchPokemon = async () => {
+    const idxRes = await server.get('/index/')
+    const monRes = await pokeAPI.get(`/pokemon/${idxRes.data}`)
+    setPokemon(monRes.data)
+  }
+
+  useEffect(() => {
+    fetchPokemon()
+  }, [])
+
+    console.log(pokemon)
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <GuessGrid />
+      <Keyboard />
     </div>
   );
 }

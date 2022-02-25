@@ -1,0 +1,93 @@
+@font-face {
+  font-family: 'pokemon_gb';
+  src:url('../../public/resources/fonts/PokemonGB/pokemongb-raeo-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  font-family: 'pokemon_gb', Arial;
+}
+
+body {
+  min-height: 100vh;
+  width: 100%;
+  margin: 0;
+  font-size: clamp(.5rem, 2.5vmin, 1.5rem);
+}
+
+#root { 
+  height: 100%;
+}
+
+.App {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.keyboard {
+  display: grid;
+  grid-template-columns: repeat(20, minmax(auto, 1.25em));
+  grid-auto-rows: 3em;
+  gap: .25em;
+  justify-content: center;
+}
+
+.key {
+  grid-column: span 2;
+  font-size: inherit;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  text-transform: uppercase;
+  border-radius: 3px;
+  user-select: none;
+  background-color: rgb(212,212,212);
+  font-weight: bold;
+
+}
+
+.key:hover, .key:focus {
+  opacity: 80%;
+}
+
+.key.wide {
+  grid-column: span 3;
+}
+
+.enter-key {
+  font-size: clamp(.5rem, 2vmin, .75rem);
+}
+
+.wrong {
+  background-color: rgb(120, 124, 126);
+  color: white;
+}
+
+.wrong-spot {
+  background-color: rgb(201, 180, 88);
+  color: white;
+}
+
+.correct {
+  background-color: rgb(106, 170, 100);
+  color: white;
+}
+
+.guess-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 2em);
+  grid-template-rows: repeat(6, 2em);
+  gap: .2em;
+  margin: 1em 0;
+}
+.guess-tile {
+  border: 1px solid rgb(210, 210, 210);
+  border-radius: 2px;
+}
+
