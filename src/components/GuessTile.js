@@ -1,9 +1,10 @@
 import React from 'react'
 
-const GuessTile = () => {
-  return (
-    <div className="guess-tile">
+const GuessTile = ({tileVal, id}) => {
 
+  return (
+    <div className='guess-tile'>
+        {tileVal}
     </div>
   )
 }

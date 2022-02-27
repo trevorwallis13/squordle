@@ -1,20 +1,19 @@
 import React from 'react'
-import GuessTile from './GuessTile'
+import GuessRow from './GuessRow';
 
 const maxWordLength = 12;
 const numberOfGuesses = 6;
 
-const GuessGrid = () => {
+const GuessGrid = ({currGuess, guessList}) => {
+  const rows = []
 
-  const tiles = [];
-
-  for (let i = 1; i<=maxWordLength * numberOfGuesses; i++) {
-    tiles.push(<GuessTile key={i} />)
+  for(let i = 0; i<numberOfGuesses; i++) {
+    rows.push(<GuessRow key={i+1} index={i} currGuess={currGuess} guessList={guessList}/>)
   }
 
   return (
     <div className="guess-grid">
-        {tiles}
+       {rows}
     </div>
   )
 }

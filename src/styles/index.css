@@ -61,7 +61,8 @@ body {
 }
 
 .enter-key {
-  font-size: clamp(.5rem, 2vmin, .75rem);
+  font-size: clamp(.25rem, 1.5vw, .75rem);
+  padding: 1px;
 }
 
 .wrong {
@@ -81,13 +82,23 @@ body {
 
 .guess-grid {
   display: grid;
-  grid-template-columns: repeat(12, 2em);
-  grid-template-rows: repeat(6, 2em);
+  grid-template-rows: repeat(6, 3em);
   gap: .2em;
   margin: 1em 0;
 }
+
+.guess-row {
+  display: grid;
+  grid-template-columns: repeat(12, 3em);
+  gap: .2em
+}
+
 .guess-tile {
   border: 1px solid rgb(210, 210, 210);
   border-radius: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
 
