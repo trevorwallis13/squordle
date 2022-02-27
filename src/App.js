@@ -7,17 +7,44 @@ import useKeyPress from './hooks/useKeyPress'
 
 const App = () => {
   
-  const [ pokemon, setPokemon ] = useState('')
+  const [ pokemon, setPokemon ] = useState({
+    id: 7,
+    name: "Squirtle",
+    img: "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/007.png"
+  })
   const [ currGuess, setCurrGuess ] = useState('')
   const [ guessList, setGuessList ] = useState([])
+  const [ isActive, setIsActive ] = useState(true)
   
   const enterRef = useRef()
 
-  console.log(currGuess)
-  console.log(guessList)
+  const checkGuess = () => {
+    if(currGuess === pokemon.name.toUpperCase()) {
+      setIsActive(false)
+      console.log(`${currGuess} is correct!`)
+    } else {
+      const guessLetters = currGuess.split('')
+
+      const validityClasses = guessLetters.map((letter, i) => {
+        const correctLetters = pokemon.name.toUpperCase().split('')
+
+        if (letter === correctLetters[i]) {
+          return 'correct'
+        }
+
+        if (correctLetters.indexOf(letter) === -1) {
+          return 'wrong'
+        }
+
+        return 'wrong-spot'
+      })
+
+      console.log(validityClasses)
+    }
+  }
 
   const addToCurrGuess = (letter) => {
-    if(currGuess.length >= 12) return
+    if(currGuess.length >= 12 || !isActive) return
     setCurrGuess(current => current + letter)
   }
   const handleKeyClick = (e) => {
@@ -25,6 +52,8 @@ const App = () => {
   }
 
   const handleSubmit = () => {
+    checkGuess()
+    if (!isActive) return
     const guessListCopy = Array.from(guessList)
     guessListCopy.push(currGuess)
     enterRef.current.focus()

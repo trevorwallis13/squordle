@@ -9,13 +9,13 @@ const Keyboard = ({handleKeyClick, handleDelete, handleSubmit, enterRef}) => {
     <IconContext.Provider value={{ size: "clamp(1em, 5vw, 1.5em"}}>
       <div className="keyboard">
         <button className="key" onClick={handleKeyClick} data-key="W">W</button>
-        <button className="key wrong" onClick={handleKeyClick} data-key="E">E</button>
+        <button className="key" onClick={handleKeyClick} data-key="E">E</button>
         <button className="key" onClick={handleKeyClick} data-key="R">R</button>
         <button className="key" onClick={handleKeyClick} data-key="T">T</button>
-        <button className="key wrong-spot" onClick={handleKeyClick} data-key="Y">Y</button>
+        <button className="key" onClick={handleKeyClick} data-key="Y">Y</button>
         <button className="key" onClick={handleKeyClick} data-key="U">U</button>
         <button className="key" onClick={handleKeyClick} data-key="I">I</button>
-        <button className="key correct" onClick={handleKeyClick} data-key="O">O</button>
+        <button className="key" onClick={handleKeyClick} data-key="O">O</button>
         <button className="key" onClick={handleKeyClick} data-key="P">P</button>
         <button className="key" onClick={handleKeyClick} data-key="Q">Q</button>
         <div className="space"></div>
