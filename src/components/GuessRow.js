@@ -1,7 +1,7 @@
 import React from 'react'
 import GuessTile from './GuessTile'
 
-const GuessRow = ({currGuess, guessList, index}) => {
+const GuessRow = ({currGuess, guessList, classNames, index}) => {
 
     // row index 0 for a fresh board will have a guessList length of 0
     //if row index === guesslist length, letters = current guess
@@ -21,12 +21,14 @@ const GuessRow = ({currGuess, guessList, index}) => {
        return ''
    }
 
+
    const tileVals = getTileVals()
+   const tileClassNames = index < guessList.length ? classNames[index] : ''
    
     let tiles = []
 
     for(let i = 0; i<12; i++) {
-        tiles.push(<GuessTile key={i+1} tileVal={tileVals[i]} />)
+        tiles.push(<GuessTile key={i+1} tileVal={tileVals[i]} tileClassName={tileClassNames[i]}/>)
     }
 
     return (

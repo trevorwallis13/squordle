@@ -1,9 +1,9 @@
 import React from 'react'
 
-const GuessTile = ({tileVal, id}) => {
+const GuessTile = ({tileVal, tileClassName, id}) => {
 
   return (
-    <div className='guess-tile'>
+    <div className={`guess-tile ${tileClassName}`}>
         {tileVal}
     </div>
   )

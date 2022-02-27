@@ -15,32 +15,28 @@ const App = () => {
   const [ currGuess, setCurrGuess ] = useState('')
   const [ guessList, setGuessList ] = useState([])
   const [ isActive, setIsActive ] = useState(true)
+  const [ classNames, setClassNames ] = useState([])
   
   const enterRef = useRef()
 
-  const checkGuess = () => {
+  const getGuessClassNames = () => {
+    return currGuess.split('').map((letter, i) => {
+      const match = pokemon.name.toUpperCase().split('')
+      if (letter === match[i]) return 'correct'
+      if (match.indexOf(letter) === -1) return 'wrong'
+      return 'wrong-spot'
+    })
+  }
+
+  const isCorrectGuess = () => {
     if(currGuess === pokemon.name.toUpperCase()) {
       setIsActive(false)
-      console.log(`${currGuess} is correct!`)
-    } else {
-      const guessLetters = currGuess.split('')
+    } 
+  }
 
-      const validityClasses = guessLetters.map((letter, i) => {
-        const correctLetters = pokemon.name.toUpperCase().split('')
-
-        if (letter === correctLetters[i]) {
-          return 'correct'
-        }
-
-        if (correctLetters.indexOf(letter) === -1) {
-          return 'wrong'
-        }
-
-        return 'wrong-spot'
-      })
-
-      console.log(validityClasses)
-    }
+  const removeFocus = () => {
+    enterRef.current.focus()
+    enterRef.current.blur()
   }
 
   const addToCurrGuess = (letter) => {
@@ -52,12 +48,18 @@ const App = () => {
   }
 
   const handleSubmit = () => {
-    checkGuess()
     if (!isActive) return
+
+    removeFocus()
+    isCorrectGuess()
+
+    const classNamesCopy = Array.from(classNames)
     const guessListCopy = Array.from(guessList)
+
+    classNamesCopy.push(getGuessClassNames())
     guessListCopy.push(currGuess)
-    enterRef.current.focus()
-    enterRef.current.blur()
+ 
+    setClassNames(classNamesCopy)
     setGuessList(guessListCopy)
     setCurrGuess('')
   }
@@ -88,13 +90,17 @@ const App = () => {
   useKeyPress(handleKeyDown)
 
   return (
-    <div className="App" tabIndex='-1'>
-      <GuessGrid currGuess={currGuess} guessList={guessList}/>
+    <div className="App">
+      <GuessGrid 
+        currGuess={currGuess} 
+        guessList={guessList}
+        classNames={classNames}
+      />
       <Keyboard 
-       handleSubmit={handleSubmit}
-       handleDelete={handleDelete}
-       handleKeyClick={handleKeyClick}
-       enterRef={enterRef}
+        handleSubmit={handleSubmit}
+        handleDelete={handleDelete}
+        handleKeyClick={handleKeyClick}
+        enterRef={enterRef}
        />
     </div>
   );
