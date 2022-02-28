@@ -1,4 +1,4 @@
-export const pokedex = [
+export const list = [
     {
       id: 1,
       name: "Bulbasaur",

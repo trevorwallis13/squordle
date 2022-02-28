@@ -8,6 +8,7 @@ const Keyboard = ({handleKeyClick, handleDelete, handleSubmit, enterRef}) => {
   return (
     <IconContext.Provider value={{ size: "clamp(1em, 5vw, 1.5em"}}>
       <div className="keyboard">
+        <button className="key" onClick={handleKeyClick} data-key="Q">Q</button>
         <button className="key" onClick={handleKeyClick} data-key="W">W</button>
         <button className="key" onClick={handleKeyClick} data-key="E">E</button>
         <button className="key" onClick={handleKeyClick} data-key="R">R</button>
@@ -17,7 +18,6 @@ const Keyboard = ({handleKeyClick, handleDelete, handleSubmit, enterRef}) => {
         <button className="key" onClick={handleKeyClick} data-key="I">I</button>
         <button className="key" onClick={handleKeyClick} data-key="O">O</button>
         <button className="key" onClick={handleKeyClick} data-key="P">P</button>
-        <button className="key" onClick={handleKeyClick} data-key="Q">Q</button>
         <div className="space"></div>
         <button className="key" onClick={handleKeyClick} data-key="A">A</button>
         <button className="key" onClick={handleKeyClick} data-key="S">S</button>
