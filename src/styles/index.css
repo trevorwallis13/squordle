@@ -1,5 +1,6 @@
 @font-face {
   font-family: 'pokemon_gb';
+
   src:url('../../public/resources/fonts/PokemonGB/pokemongb-raeo-webfont.woff') format('woff');
   font-weight: normal;
   font-style: normal;
@@ -19,12 +20,13 @@ body {
   min-height: 100vh;
   width: 100%;
   margin: 0;
-  /* font-size: clamp(.5rem, 2.5vw, 1.5rem); */
+  font-size: clamp(.25rem, 1.5vw, 1.5rem);
 }
 
 .App {
   height: 100%;
   min-height: 100vh;
+  padding: 5em 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -32,16 +34,21 @@ body {
 }
 
 .keyboard {
+  position: fixed;
+  bottom: 2em;
+  right: 50%;
+  transform: translateX(50%);
   display: grid;
-  grid-template-columns: repeat(20, minmax(auto, 1.25em));
+  grid-template-columns: repeat(20, minmax(.5rem, 1.25rem));
   grid-auto-rows: 3em;
   gap: .25em;
   justify-content: center;
+  width: 100%;
+  padding: 0 .5em;
 }
 
 .key {
   grid-column: span 2;
-  font-size: inherit;
   justify-content: center;
   align-items: center;
   cursor: pointer;
@@ -50,6 +57,7 @@ body {
   user-select: none;
   background-color: rgb(212,212,212);
   font-weight: bold;
+  font-size: clamp(.5rem, 2.5vw, 1rem);
 
 }
 
@@ -83,14 +91,18 @@ body {
 
 .guess-grid {
   display: grid;
-  grid-template-rows: repeat(6, 3em);
+  grid-template-rows: repeat(6, minmax(6%, 3rem));
   gap: .2em;
-  margin: 1em 0;
+  margin: 0 auto;
+  width: 97.5%;
+  padding: 0 .5em;
+  justify-content: center;
+  font-size: clamp(.5rem, 3.5vw, 1.5rem);
 }
 
 .guess-row {
   display: grid;
-  grid-template-columns: repeat(12, 3em);
+  grid-template-columns: repeat(12, minmax(6%, 3rem));
   gap: .2em
 }
 
