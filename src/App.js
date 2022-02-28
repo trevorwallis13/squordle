@@ -6,6 +6,8 @@ import Keyboard from './components/Keyboard'
 import GuessGrid from './components/GuessGrid'
 import useKeyPress from './hooks/useKeyPress'
 import ResultModal from './components/ResultModal'
+import { numberOfGuesses } from './config'
+import Header from './components/header/Header'
 
 const dictionary = list.map(mon => mon.name.toUpperCase())
 
@@ -22,23 +24,26 @@ const App = () => {
   const [gameStatus, setGameStatus] = useState('playing')
   const [showModal, setShowModal] = useState(false)
   const [pokedex, setPokedex] = useState(JSON.parse(localStorage.getItem('pokedex')) || [])
+  const [userStats, setUserStats] = useState(JSON.parse(localStorage.getItem('userStats')) || [])
 
   useMemo(() => {
-    if(guessList.length === 6 && guessList[guessList.length-1] !== pokemon.name.toUpperCase()) {
+    if(guessList.length === numberOfGuesses && guessList[guessList.length-1] !== pokemon.name.toUpperCase()) {
       setGameStatus('lost')
       setIsActive(false)
       setShowModal(true)
+      setUserStats(current => [...current, {pokemon: pokemon.name, guesses: 0}])
     }
-  },[guessList])
+  },[guessList, pokemon])
 
   // LOGGERS
 
   useMemo(() => console.log(guessList), [guessList])
   useMemo(() => console.log(gameStatus), [gameStatus])
+  useMemo(() => console.log(userStats), [userStats])
   
   // REFS
 
-  const enterRef = useRef()
+  const focusRef = useRef()
 
   // BOOLEAN FUNCTIONS
 
@@ -52,6 +57,7 @@ const App = () => {
       setShowModal(true)
       setIsActive(false)
       setPokedex(current => [...current, pokemon])
+      setUserStats(current => [...current, {pokemon: pokemon.name, guesses: guessList.length + 1}])
     } 
   }
 
@@ -67,8 +73,8 @@ const App = () => {
   }
 
   const removeFocus = () => {
-    enterRef.current.focus()
-    enterRef.current.blur()
+    focusRef.current.focus()
+    focusRef.current.blur()
   }
 
   const addToCurrGuess = (letter) => {
@@ -133,8 +139,13 @@ const App = () => {
     localStorage.setItem('pokedex', JSON.stringify(pokedex))
   }, [pokedex])
 
+  useEffect(() => {
+    localStorage.setItem('userStats', JSON.stringify(userStats))
+  }, [userStats])
+
   return (
     <div className="App">
+      <Header />
       <GuessGrid 
         currGuess={currGuess} 
         guessList={guessList}
@@ -146,7 +157,7 @@ const App = () => {
         handleSubmit={handleSubmit}
         handleDelete={handleDelete}
         handleKeyClick={handleKeyClick}
-        enterRef={enterRef}
+        focusRef={focusRef}
        />
     </div>
   );

@@ -3,7 +3,7 @@ import { FiDelete } from 'react-icons/fi'
 import { IconContext } from 'react-icons'
 
 
-const Keyboard = ({handleKeyClick, handleDelete, handleSubmit, enterRef}) => {
+const Keyboard = ({handleKeyClick, handleDelete, handleSubmit, focusRef}) => {
 
   return (
     <IconContext.Provider value={{ size: "clamp(1em, 5vw, 1.5em"}}>
@@ -18,7 +18,7 @@ const Keyboard = ({handleKeyClick, handleDelete, handleSubmit, enterRef}) => {
         <button className="key" onClick={handleKeyClick} data-key="I">I</button>
         <button className="key" onClick={handleKeyClick} data-key="O">O</button>
         <button className="key" onClick={handleKeyClick} data-key="P">P</button>
-        <div className="space"></div>
+        <div ref={focusRef} className="space"></div>
         <button className="key" onClick={handleKeyClick} data-key="A">A</button>
         <button className="key" onClick={handleKeyClick} data-key="S">S</button>
         <button className="key" onClick={handleKeyClick} data-key="D">D</button>
@@ -29,7 +29,7 @@ const Keyboard = ({handleKeyClick, handleDelete, handleSubmit, enterRef}) => {
         <button className="key" onClick={handleKeyClick} data-key="K">K</button>
         <button className="key" onClick={handleKeyClick} data-key="L">L</button>
         <div className="space"></div>
-        <button ref={enterRef} className="key wide enter-key" onClick={handleSubmit} data-enter>Enter</button>
+        <button className="key wide enter-key" onClick={handleSubmit} data-enter>Enter</button>
         <button className="key" onClick={handleKeyClick} data-key="Z">Z</button>
         <button className="key" onClick={handleKeyClick} data-key="X">X</button>
         <button className="key" onClick={handleKeyClick} data-key="C">C</button>
@@ -37,7 +37,7 @@ const Keyboard = ({handleKeyClick, handleDelete, handleSubmit, enterRef}) => {
         <button className="key" onClick={handleKeyClick} data-key="B">B</button>
         <button className="key" onClick={handleKeyClick} data-key="N">N</button>
         <button className="key" onClick={handleKeyClick} data-key="M">M</button>
-        <button className="key wide" onClick={handleDelete} data-delete><FiDelete /></button>
+        <button  className="key wide" onClick={handleDelete} data-delete><FiDelete /></button>
       </div>
     </IconContext.Provider>
   )

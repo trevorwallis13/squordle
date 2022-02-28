@@ -1,5 +1,6 @@
 import React from 'react'
 import GuessTile from './GuessTile'
+import { maxWordLength } from '../config'
 
 const GuessRow = ({currGuess, guessList, classNames, rowIndex, showWarning}) => {
 
@@ -21,7 +22,7 @@ const GuessRow = ({currGuess, guessList, classNames, rowIndex, showWarning}) => 
    
     let tiles = []
 
-    for(let i = 0; i<12; i++) {
+    for(let i = 0; i<maxWordLength; i++) {
         tiles.push(<GuessTile key={i+1} tileVal={tileVals[i]} tileClassName={tileClassNames[i]} isCurrentRow={isCurrentRow} showWarning={showWarning}/>)
     }
 

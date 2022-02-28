@@ -1,8 +1,8 @@
 import React from 'react'
 import GuessRow from './GuessRow';
+import { numberOfGuesses } from '../config';
 
-const maxWordLength = 12;
-const numberOfGuesses = 6;
+
 
 const GuessGrid = ({currGuess, guessList, classNames, showWarning}) => {
   const rows = []

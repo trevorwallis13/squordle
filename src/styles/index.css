@@ -1,6 +1,5 @@
 @font-face {
   font-family: 'pokemon_gb';
-
   src:url('../../public/resources/fonts/PokemonGB/pokemongb-raeo-webfont.woff') format('woff');
   font-weight: normal;
   font-style: normal;
@@ -10,6 +9,7 @@
 *, *::before, *::after {
   box-sizing: border-box;
   font-family: 'pokemon_gb', Arial;
+  color: #33321a
 }
 
 #root {
@@ -26,25 +26,84 @@ body {
 .App {
   height: 100%;
   min-height: 100vh;
-  padding: 5em 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
 }
 
+.main-header {
+  padding: .5em;
+  border-bottom: 1px solid rgb(210, 210, 210);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+.logo {
+  width: 175px;
+}
+
+.main-nav {
+  display: none;
+  border: 3px double black;
+  border-radius: 3px;
+  background-color: white;
+  position: absolute;
+  top: calc(100% + 3px);
+  right: 3px;
+  padding: .5em 1em;
+  z-index: 1;
+}
+
+.main-nav::after {
+  content: '';
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: 2px solid #015E61;
+  border-radius: 3px;
+}
+
+.show-nav {
+  display: block;
+}
+
+.main-nav ul {
+  margin: 0;
+  padding: 0;
+}
+
+.main-nav a {
+  color: inherit;
+  text-decoration: none;
+  letter-spacing: -1px;
+}
+
+.main-nav a:hover, .main-nav a:focus {
+  color: rgb(0,94,98);
+  text-decoration: none;
+}
+
+.main-nav li {
+  list-style: none;
+  padding: .25em 0;
+  cursor: pointer;
+}
+
 .keyboard {
-  position: fixed;
-  bottom: 2em;
-  right: 50%;
-  transform: translateX(50%);
   display: grid;
-  grid-template-columns: repeat(20, minmax(.5rem, 1.25rem));
-  grid-auto-rows: 3em;
+  grid-template-columns: repeat(20, minmax(.5rem, 1.5rem));
+  grid-auto-rows: 3.5em;
   gap: .25em;
   justify-content: center;
   width: 100%;
-  padding: 0 .5em;
+  padding: 1em .5em;
 }
 
 .key {
@@ -55,9 +114,10 @@ body {
   text-transform: uppercase;
   border-radius: 3px;
   user-select: none;
-  background-color: rgb(212,212,212);
+  background-color: rgb(220,220,220);
+  border: 2px solid rgb(120, 124, 126);
   font-weight: bold;
-  font-size: clamp(.5rem, 2.5vw, 1rem);
+  font-size: clamp(.5rem, 2.5vw, 1.5rem);
 
 }
 
@@ -91,18 +151,18 @@ body {
 
 .guess-grid {
   display: grid;
-  grid-template-rows: repeat(6, minmax(6%, 3rem));
+  grid-template-rows: repeat(8, minmax(6%, 2.5rem));
   gap: .2em;
   margin: 0 auto;
   width: 97.5%;
-  padding: 0 .5em;
+  padding: 2em .5em;
   justify-content: center;
-  font-size: clamp(.5rem, 3.5vw, 1.5rem);
+  font-size: clamp(.5rem, 3.5vw, 1.2rem);
 }
 
 .guess-row {
   display: grid;
-  grid-template-columns: repeat(12, minmax(6%, 3rem));
+  grid-template-columns: repeat(12, minmax(6%, 2.5rem));
   gap: .2em
 }
 
