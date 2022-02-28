@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/squordle/static/css/main.bf6e39fa.css",
+    "main.css": "/squordle/static/css/main.0f5f7a40.css",
     "main.js": "/squordle/static/js/main.ea4e0b4f.js",
     "static/media/pokemongb-raeo-webfont.woff": "/squordle/static/media/pokemongb-raeo-webfont.d1b2840ac0dfb4a14692.woff",
     "index.html": "/squordle/index.html",
-    "main.bf6e39fa.css.map": "/squordle/static/css/main.bf6e39fa.css.map",
+    "main.0f5f7a40.css.map": "/squordle/static/css/main.0f5f7a40.css.map",
     "main.ea4e0b4f.js.map": "/squordle/static/js/main.ea4e0b4f.js.map"
   },
   "entrypoints": [
-    "static/css/main.bf6e39fa.css",
+    "static/css/main.0f5f7a40.css",
     "static/js/main.ea4e0b4f.js"
   ]
 }
