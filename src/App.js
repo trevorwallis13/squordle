@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useMemo } from 'react'
 import server from './api/server'
 import pokeAPI from './api/pokeAPI'
 import { list } from './api/list'
+import { reference } from './api/reference'
 import Keyboard from './components/Keyboard'
 import GuessGrid from './components/GuessGrid'
 import useKeyPress from './hooks/useKeyPress'
@@ -15,7 +16,7 @@ const App = () => {
 
   // STATE MANAGEMENT 
   
-  const [pokemon, setPokemon] = useState(list[7])
+  const [pokemon, setPokemon] = useState('')
   const [currGuess, setCurrGuess] = useState('')
   const [guessList, setGuessList] = useState([])
   const [isActive, setIsActive] = useState(true)
@@ -40,6 +41,7 @@ const App = () => {
   useMemo(() => console.log(guessList), [guessList])
   useMemo(() => console.log(gameStatus), [gameStatus])
   useMemo(() => console.log(userStats), [userStats])
+  useMemo(() => console.log(pokemon), [pokemon])
   
   // REFS
 
@@ -129,11 +131,41 @@ const App = () => {
     return
   })
 
+  const handlePlayAgain = () => {
+    const randIdx = Math.floor(Math.random() * list.length)
+
+    setCurrGuess('')
+    setIsActive(true)
+    setGameStatus('playing')
+    setGuessList([])
+    setClassNames([])
+    setShowModal(false)
+    setPokemon(list[randIdx])
+
+  }
+
   const fetchPokemon = async () => {
     const idxRes = await server.get('/index/')
     const monRes = await pokeAPI.get(`/pokemon/${idxRes.data}`)
     setPokemon(monRes.data)
   }
+
+  useEffect(() => {
+
+    const getI = (iVal, arr) => {
+      return iVal > arr.length ? getI(Math.floor(iVal/2), arr) : iVal
+     }
+
+    const today = new Date()
+    const ronaDate = new Date('March 16, 2020')
+    const dateDif = Math.floor(today-ronaDate) / 1000 / 60 / 60 / 24
+    const idxCalc = Math.floor(Math.abs(list.length - dateDif)/list.length * reference.length)
+
+    const i = Math.min(reference[getI(idxCalc, reference)], list.length - 1)
+    
+    setPokemon(list[i])
+    
+  }, [])
 
   useEffect(() => {
     localStorage.setItem('pokedex', JSON.stringify(pokedex))
@@ -152,7 +184,12 @@ const App = () => {
         classNames={classNames}
         showWarning={showWarning}
       />
-      <ResultModal showModal={showModal} setShowModal={setShowModal} pokemon={pokemon} gameStatus={gameStatus}/>
+      <ResultModal 
+        showModal={showModal} 
+        setShowModal={setShowModal} 
+        pokemon={pokemon} 
+        gameStatus={gameStatus}
+        handlePlayAgain={handlePlayAgain}/>
       <Keyboard 
         handleSubmit={handleSubmit}
         handleDelete={handleDelete}

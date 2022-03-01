@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import logo from '../../images/squordle-logo.jpg'
+import logo from '../../images/squordle-logo.png'
 import Nav from './Nav'
 
 const Header = () => {
@@ -10,7 +10,6 @@ const Header = () => {
         setIsVisible(curr => !curr);
     }
 
-    console.log(isVisible)
   return (
     <header className="main-header">
         <img src={logo} alt="squordle logo" className="logo"/>
