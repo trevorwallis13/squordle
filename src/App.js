@@ -24,8 +24,9 @@ const App = () => {
   const [showWarning, setShowWarning] = useState(false)
   const [gameStatus, setGameStatus] = useState('playing')
   const [showModal, setShowModal] = useState(false)
-  const [pokedex, setPokedex] = useState(JSON.parse(localStorage.getItem('pokedex')) || [])
+  const [userPokedex, setUserPokedex] = useState(JSON.parse(localStorage.getItem('pokedex')) || [])
   const [userStats, setUserStats] = useState(JSON.parse(localStorage.getItem('userStats')) || [])
+
 
   useMemo(() => {
     if(guessList.length === numberOfGuesses && guessList[guessList.length-1] !== pokemon.name.toUpperCase()) {
@@ -42,6 +43,7 @@ const App = () => {
   useMemo(() => console.log(gameStatus), [gameStatus])
   useMemo(() => console.log(userStats), [userStats])
   useMemo(() => console.log(pokemon), [pokemon])
+  useMemo(() => console.log(userPokedex), [userPokedex])
   
   // REFS
 
@@ -58,7 +60,7 @@ const App = () => {
       setGameStatus('won')
       setShowModal(true)
       setIsActive(false)
-      setPokedex(current => [...current, pokemon])
+      setUserPokedex(current => [...current, pokemon])
       setUserStats(current => [...current, {pokemon: pokemon.name, guesses: guessList.length + 1}])
     } 
   }
@@ -168,8 +170,8 @@ const App = () => {
   }, [])
 
   useEffect(() => {
-    localStorage.setItem('pokedex', JSON.stringify(pokedex))
-  }, [pokedex])
+    localStorage.setItem('pokedex', JSON.stringify(userPokedex))
+  }, [userPokedex])
 
   useEffect(() => {
     localStorage.setItem('userStats', JSON.stringify(userStats))
@@ -177,7 +179,9 @@ const App = () => {
 
   return (
     <div className="App">
-      <Header />
+      <Header 
+        userPokedex={userPokedex}
+      />
       <GuessGrid 
         currGuess={currGuess} 
         guessList={guessList}
