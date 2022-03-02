@@ -39,11 +39,11 @@ const App = () => {
 
   // LOGGERS
 
-  useMemo(() => console.log(guessList), [guessList])
-  useMemo(() => console.log(gameStatus), [gameStatus])
-  useMemo(() => console.log(userStats), [userStats])
-  useMemo(() => console.log(pokemon), [pokemon])
-  useMemo(() => console.log(userPokedex), [userPokedex])
+  // useMemo(() => console.log(guessList), [guessList])
+  // useMemo(() => console.log(gameStatus), [gameStatus])
+  // useMemo(() => console.log(userStats), [userStats])
+  // useMemo(() => console.log(pokemon), [pokemon])
+  // useMemo(() => console.log(userPokedex), [userPokedex])
   
   // REFS
 
@@ -181,6 +181,7 @@ const App = () => {
     <div className="App">
       <Header 
         userPokedex={userPokedex}
+        handlePlayAgain={handlePlayAgain}
       />
       <GuessGrid 
         currGuess={currGuess} 

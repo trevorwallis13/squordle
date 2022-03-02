@@ -3,10 +3,25 @@ import PokedexItem from './PokedexItem'
 
 const Pokedex = ({userPokedex, pokedexIsVisible, showPokedex}) => {
 
-  console.log(userPokedex)
 
-  const pokedexList = userPokedex.map((pokemon, i) => {
-    return <PokedexItem key={i} pokemon={pokemon} count={i+1}/>
+  const getCount = (arr) => {
+    const count = {}
+    arr.forEach(item => count[item.name] ? count[item.name]++ : count[item.name] = 1)
+    return count
+  }
+  
+  const filterAndAddCount = (arr) => {
+    
+    const counts = getCount(arr)
+    const filteredList = arr.filter((item, index, array) => index === array.map(obj => obj.name).indexOf(item.name))
+    
+    filteredList.forEach(pokemon => pokemon.count = counts[pokemon.name])
+
+    return filteredList
+  }
+
+  const pokedexList = filterAndAddCount(userPokedex).map((pokemon, i) => {
+    return <PokedexItem key={i} pokemon={pokemon}/>
   })
 
     
