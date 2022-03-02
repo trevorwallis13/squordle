@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/squordle/static/css/main.0900f3ff.css",
-    "main.js": "/squordle/static/js/main.c2309944.js",
+    "main.css": "/squordle/static/css/main.4ef544f8.css",
+    "main.js": "/squordle/static/js/main.692d5bc9.js",
     "static/media/squordle-logo.png": "/squordle/static/media/squordle-logo.10286651adc2789a9db7.png",
     "static/media/pokemongb-raeo-webfont.woff": "/squordle/static/media/pokemongb-raeo-webfont.d1b2840ac0dfb4a14692.woff",
     "index.html": "/squordle/index.html",
-    "main.0900f3ff.css.map": "/squordle/static/css/main.0900f3ff.css.map",
-    "main.c2309944.js.map": "/squordle/static/js/main.c2309944.js.map"
+    "main.4ef544f8.css.map": "/squordle/static/css/main.4ef544f8.css.map",
+    "main.692d5bc9.js.map": "/squordle/static/js/main.692d5bc9.js.map"
   },
   "entrypoints": [
-    "static/css/main.0900f3ff.css",
-    "static/js/main.c2309944.js"
+    "static/css/main.4ef544f8.css",
+    "static/js/main.692d5bc9.js"
   ]
 }
