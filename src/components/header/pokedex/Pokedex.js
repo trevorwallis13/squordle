@@ -27,7 +27,7 @@ const Pokedex = ({userPokedex, pokedexIsVisible, showPokedex}) => {
     
   return (
     <aside className={`pokedex right-container menu-container ${pokedexIsVisible ? 'show-item': ''}`}>
-        <span onClick={showPokedex}>X</span>
+        <span onClick={showPokedex} className="exit-button">X</span>
         {pokedexList}
     </aside>
   )

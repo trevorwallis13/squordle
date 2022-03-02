@@ -2,9 +2,9 @@ import { useState } from 'react'
 import logo from '../../images/squordle-logo.png'
 import Nav from './Nav'
 import Pokedex from './pokedex/Pokedex'
-import UserStats from './UserStats'
+import UserStats from './userStats/UserStats'
 
-const Header = ({userPokedex, handlePlayAgain}) => {
+const Header = ({userPokedex, userStats, handlePlayAgain}) => {
 
     const [navIsVisible, setNavIsVisible] = useState(false)
     const [pokedexIsVisible, setPokedexIsVisible] = useState(false)
@@ -25,14 +25,27 @@ const Header = ({userPokedex, handlePlayAgain}) => {
       setUserStatsIsVisible(curr => !curr)
       setNavIsVisible(curr => !curr)
     }
-    
+
   return (
     <header className="main-header">
         <img src={logo} alt="squordle logo" className="logo"/>
         <button onClick={showNav}>Menu</button>
-        <Nav navIsVisible={navIsVisible} showPokedex={showPokedex} showUserStats={showUserStats} handlePlayAgain={handlePlayAgain}/>
-        <Pokedex userPokedex={userPokedex} pokedexIsVisible={pokedexIsVisible} showPokedex={showPokedex}/>
-        <UserStats userStatsIsVisible={userStatsIsVisible} showUserStats={showUserStats} />
+        <Nav 
+          navIsVisible={navIsVisible} 
+          showPokedex={showPokedex} 
+          showUserStats={showUserStats} 
+          handlePlayAgain={handlePlayAgain}
+        />
+        <Pokedex 
+          userPokedex={userPokedex} 
+          pokedexIsVisible={pokedexIsVisible} 
+          showPokedex={showPokedex}
+        />
+        <UserStats 
+          userStatsIsVisible={userStatsIsVisible}
+          showUserStats={showUserStats} 
+          userStats={userStats} 
+        />
     </header>
   )
 }

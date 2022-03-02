@@ -42,7 +42,7 @@ const App = () => {
   // useMemo(() => console.log(guessList), [guessList])
   // useMemo(() => console.log(gameStatus), [gameStatus])
   // useMemo(() => console.log(userStats), [userStats])
-  // useMemo(() => console.log(pokemon), [pokemon])
+  useMemo(() => console.log(pokemon), [pokemon])
   // useMemo(() => console.log(userPokedex), [userPokedex])
   
   // REFS
@@ -134,6 +134,8 @@ const App = () => {
   })
 
   const handlePlayAgain = () => {
+    if(isActive) return
+    
     const randIdx = Math.floor(Math.random() * list.length)
 
     setCurrGuess('')
@@ -181,6 +183,7 @@ const App = () => {
     <div className="App">
       <Header 
         userPokedex={userPokedex}
+        userStats={userStats}
         handlePlayAgain={handlePlayAgain}
       />
       <GuessGrid 
