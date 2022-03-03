@@ -184,7 +184,7 @@ const App = () => {
     }
 
     const statsFromStorage = JSON.parse(localStorage.getItem("userStats"))
-    const lastDate = statsFromStorage.length ? statsFromStorage[statsFromStorage.length - 1].date : ''
+    const lastDate = !statsFromStorage === undefined ? statsFromStorage[statsFromStorage.length - 1].date : ''
 
     if(dateIsToday(lastDate)) {
       const i = Math.floor(Math.random() * list.length)
