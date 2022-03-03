@@ -1,6 +1,4 @@
 import { useState, useEffect, useRef, useMemo } from 'react'
-import server from './api/server'
-import pokeAPI from './api/pokeAPI'
 import { list } from './api/list'
 import { reference } from './api/reference'
 import Keyboard from './components/Keyboard'
@@ -26,14 +24,17 @@ const App = () => {
   const [showModal, setShowModal] = useState(false)
   const [userPokedex, setUserPokedex] = useState(JSON.parse(localStorage.getItem('pokedex')) || [])
   const [userStats, setUserStats] = useState(JSON.parse(localStorage.getItem('userStats')) || [])
+  const [navIsVisible, setNavIsVisible] = useState(false)
+  const [pokedexIsVisible, setPokedexIsVisible] = useState(false)
+  const [userStatsIsVisible, setUserStatsIsVisible] = useState(false)
 
 
   useMemo(() => {
     if(guessList.length === numberOfGuesses && guessList[guessList.length-1] !== pokemon.name.toUpperCase()) {
       setGameStatus('lost')
       setIsActive(false)
-      setShowModal(true)
-      setUserStats(current => [...current, {pokemon: pokemon.name, guesses: 0}])
+      setTimeout(() => setShowModal(true), 2000)
+      setUserStats(current => [...current, {pokemon: pokemon.name, guesses: 0, date: new Date()}])
     }
   },[guessList, pokemon])
 
@@ -42,7 +43,7 @@ const App = () => {
   // useMemo(() => console.log(guessList), [guessList])
   // useMemo(() => console.log(gameStatus), [gameStatus])
   // useMemo(() => console.log(userStats), [userStats])
-  useMemo(() => console.log(pokemon), [pokemon])
+  // useMemo(() => console.log(pokemon), [pokemon])
   // useMemo(() => console.log(userPokedex), [userPokedex])
   
   // REFS
@@ -58,10 +59,10 @@ const App = () => {
   const isCorrectGuess = () => {
     if(currGuess === pokemon.name.toUpperCase()) {
       setGameStatus('won')
-      setShowModal(true)
       setIsActive(false)
       setUserPokedex(current => [...current, pokemon])
-      setUserStats(current => [...current, {pokemon: pokemon.name, guesses: guessList.length + 1}])
+      setUserStats(current => [...current, {pokemon: pokemon.name, guesses: guessList.length + 1, date: new Date()}])
+      setTimeout(() => setShowModal(true), 2000)
     } 
   }
 
@@ -135,40 +136,71 @@ const App = () => {
 
   const handlePlayAgain = () => {
     if(isActive) return
-    
-    const randIdx = Math.floor(Math.random() * list.length)
 
+    const randIdx = Math.floor(Math.random() * list.length)
+    setShowModal(false)
     setCurrGuess('')
     setIsActive(true)
     setGameStatus('playing')
     setGuessList([])
     setClassNames([])
-    setShowModal(false)
     setPokemon(list[randIdx])
-
   }
 
-  const fetchPokemon = async () => {
-    const idxRes = await server.get('/index/')
-    const monRes = await pokeAPI.get(`/pokemon/${idxRes.data}`)
-    setPokemon(monRes.data)
+  const showNav = () => {
+    if(pokedexIsVisible || userStatsIsVisible) {
+      setPokedexIsVisible(false)
+      setUserStatsIsVisible(false)
+      setNavIsVisible(false)
+    } else {
+      setNavIsVisible(curr => !curr)
+    }
+  }
+
+  const showPokedex = () => {
+    setPokedexIsVisible(curr => !curr)
+    setNavIsVisible(curr => !curr)
+  }
+
+  const showUserStats = () => {
+    setUserStatsIsVisible(curr => !curr)
+    setNavIsVisible(curr => !curr)
   }
 
   useEffect(() => {
 
     const getI = (iVal, arr) => {
       return iVal > arr.length ? getI(Math.floor(iVal/2), arr) : iVal
-     }
-
-    const today = new Date()
-    const ronaDate = new Date('March 16, 2020')
-    const dateDif = Math.floor(today-ronaDate) / 1000 / 60 / 60 / 24
-    const idxCalc = Math.floor(Math.abs(list.length - dateDif)/list.length * reference.length)
-
-    const i = Math.min(reference[getI(idxCalc, reference)], list.length - 1)
+    }
     
-    setPokemon(list[i])
-    
+    const dateIsToday = (dateStr) => {
+      const today = new Date()
+      const date = new Date(dateStr)
+      const sameDay = today.getDate() === date.getDate()
+      const sameMonth = today.getMonth() === date.getMonth()
+      const sameYear = today.getFullYear() === date.getFullYear()
+
+      return sameDay && sameMonth && sameYear
+    }
+
+    const statsFromStorage = JSON.parse(localStorage.getItem("userStats"))
+    const idx = statsFromStorage.length - 1
+    const lastDate = statsFromStorage[idx].date
+
+    if(dateIsToday(lastDate)) {
+      const i = Math.floor(Math.random() * list.length)
+      setPokemon(list[i])
+    } else {
+      const today = new Date()
+      const ronaDate = new Date('March 16, 2020')
+      const dateDif = Math.floor(today-ronaDate) / 1000 / 60 / 60 / 24
+      const idxCalc = Math.floor(Math.abs(list.length - dateDif)/list.length * reference.length)
+  
+      const i = Math.min(reference[getI(idxCalc, reference)], list.length - 1)
+      
+      setPokemon(list[i])
+    }
+
   }, [])
 
   useEffect(() => {
@@ -185,6 +217,12 @@ const App = () => {
         userPokedex={userPokedex}
         userStats={userStats}
         handlePlayAgain={handlePlayAgain}
+        navIsVisible={navIsVisible}
+        pokedexIsVisible={pokedexIsVisible}
+        userStatsIsVisible={userStatsIsVisible}
+        showNav={showNav}
+        showPokedex={showPokedex}
+        showUserStats={showUserStats}
       />
       <GuessGrid 
         currGuess={currGuess} 
@@ -197,7 +235,9 @@ const App = () => {
         setShowModal={setShowModal} 
         pokemon={pokemon} 
         gameStatus={gameStatus}
-        handlePlayAgain={handlePlayAgain}/>
+        handlePlayAgain={handlePlayAgain}
+        showPokedex={showPokedex}
+      />
       <Keyboard 
         handleSubmit={handleSubmit}
         handleDelete={handleDelete}

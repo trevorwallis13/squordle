@@ -2,7 +2,7 @@ import React from 'react'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 
-const ResultModal = ({showModal, setShowModal, pokemon, gameStatus, handlePlayAgain}) => {
+const ResultModal = ({showModal, setShowModal, showPokedex, pokemon, gameStatus, handlePlayAgain}) => {
    
     const closeModal = () => {
         setShowModal(false)
@@ -17,6 +17,11 @@ const ResultModal = ({showModal, setShowModal, pokemon, gameStatus, handlePlayAg
 
         return `Uh oh! Wild ${pokemon.name} got away!`
     }
+
+    const handleShowPokedex = () => {
+      setShowModal(false)
+      showPokedex()
+    }
     
   return (
     <Modal
@@ -27,11 +32,11 @@ const ResultModal = ({showModal, setShowModal, pokemon, gameStatus, handlePlayAg
     <Modal.Header closeButton onClick={closeModal}></Modal.Header>
     <Modal.Body>
       <h4>{setMessage()}</h4>
-      <img className={gameStatus === 'lost' ? 'slide-away' : ''} src={pokemon.img} alt={`image of ${pokemon.name}`} /> 
+      <img className={gameStatus === 'lost' ? 'slide-away' : ''} src={pokemon.img} alt={`${pokemon.name}`} /> 
     </Modal.Body>
     <Modal.Footer>
         <Button variant='outline-dark' onClick={handlePlayAgain}>Play again!</Button>
-        <Button variant='outline-dark'>Pokedex</Button>
+        <Button variant='outline-dark' onClick={handleShowPokedex}>Pokedex</Button>
     </Modal.Footer>
   </Modal>
   )

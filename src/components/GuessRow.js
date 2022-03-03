@@ -17,13 +17,14 @@ const GuessRow = ({currGuess, guessList, classNames, rowIndex, showWarning}) => 
    }
 
    const isCurrentRow = rowIndex === guessList.length
+   const isPreviousRow = rowIndex === guessList.length - 1
    const tileVals = getTileVals()
    const tileClassNames = rowIndex < guessList.length ? classNames[rowIndex] : ''
    
     let tiles = []
 
     for(let i = 0; i<maxWordLength; i++) {
-        tiles.push(<GuessTile key={i+1} tileVal={tileVals[i]} tileClassName={tileClassNames[i]} isCurrentRow={isCurrentRow} showWarning={showWarning}/>)
+        tiles.push(<GuessTile key={i+1} index={i+1} tileVal={tileVals[i]} tileClassName={tileClassNames[i]} isCurrentRow={isCurrentRow} isPreviousRow={isPreviousRow} showWarning={showWarning}/>)
     }
 
     return (
