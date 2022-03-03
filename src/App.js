@@ -167,6 +167,18 @@ const App = () => {
     setNavIsVisible(curr => !curr)
   }
 
+  const closeMenus = () => {
+    if(navIsVisible) {
+      setNavIsVisible(false)
+    }
+    if(pokedexIsVisible) {
+      setPokedexIsVisible(false)
+    }
+    if(userStatsIsVisible) {
+      setUserStatsIsVisible(false)
+    }
+  }
+
   useEffect(() => {
 
     const getI = (iVal, arr) => {
@@ -211,7 +223,7 @@ const App = () => {
   }, [userStats])
 
   return (
-    <div className="App">
+    <div className="App" onClick={closeMenus}>
       <Header 
         userPokedex={userPokedex}
         userStats={userStats}

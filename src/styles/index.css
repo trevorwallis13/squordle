@@ -12,21 +12,23 @@
   color: #33321a
 }
 
-#root {
-  min-height: 100vh;
-}
-
-body {
+/* #root {
   min-height: -webkit-fill-available;
   min-height: 100vh;
+} */
+
+body {
+  /* min-height: -webkit-fill-available;
+  min-height: 100vh; */
   width: 100%;
   margin: 0;
   font-size: clamp(.25rem, 1.5vw, 1.5rem);
 }
 
 .App {
-  height: 100%;
+  /* height: 100%;
   min-height: 100vh;
+  min-height: -webkit-fill-available; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -204,7 +206,7 @@ body {
 .keyboard {
   display: grid;
   grid-template-columns: repeat(20, minmax(.5rem, 1.5rem));
-  grid-auto-rows: 3.5em;
+  grid-auto-rows: 3em;
   gap: .25em;
   justify-content: center;
   width: 100%;
@@ -222,7 +224,7 @@ body {
   background-color: rgb(220,220,220);
   border: 2px solid rgb(120, 124, 126);
   font-weight: bold;
-  font-size: clamp(.5rem, 2.5vw, 1.5rem);
+  font-size: clamp(.5rem, 3.5vw, 1rem);
 }
 
 .key:hover, .key:focus {
@@ -255,19 +257,29 @@ body {
 
 .guess-grid {
   display: grid;
-  grid-template-rows: repeat(8, minmax(6%, 2.5rem));
+  grid-template-rows: repeat(8, 6vh);
   gap: .2em;
   margin: 0 auto;
   width: 97.5%;
-  padding: .5em;
+  padding: 1.5em;
   justify-content: center;
-  font-size: clamp(.5rem, 3.5vw, 1.2rem);
+  font-size: clamp(.5rem, 3.5vmin, 1.2rem);
 }
 
 .guess-row {
   display: grid;
-  grid-template-columns: repeat(12, minmax(6%, 2.5rem));
+  grid-template-columns: repeat(12, 3vw);
   gap: .2em
+}
+
+@media (orientation: portrait) {
+  .guess-grid {
+    grid-template-rows: repeat(8, 6vh);
+  }
+
+  .guess-row {
+    grid-template-columns: repeat(12, 7vw)
+  }
 }
 
 .guess-tile {
