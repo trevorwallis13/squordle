@@ -224,7 +224,7 @@ body {
   background-color: rgb(220,220,220);
   border: 2px solid rgb(120, 124, 126);
   font-weight: bold;
-  font-size: clamp(.5rem, 3.5vw, 1rem);
+  font-size: clamp(.25rem, 2.5vw, 1rem);
 }
 
 .key:hover, .key:focus {
