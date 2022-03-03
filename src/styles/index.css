@@ -35,14 +35,20 @@ body {
 
 .main-header {
   padding: .5rem;
-  -webkit-padding-end: .5rem;
-  -webkit-padding-start: .5rem;
+  -webkit-padding-end: .25rem;
+  -webkit-padding-start: .25rem;
   border-bottom: 1px solid rgb(210, 210, 210);
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
   position: relative;
+}
+
+@media screen and (max-width: 500px) {
+  .main-header {
+    padding: .5rem 0;
+  }
 }
 
 .logo {
