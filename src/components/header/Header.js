@@ -1,16 +1,22 @@
-
+import {useState} from 'react'
 import logo from '../../images/squordle-logo.png'
 import Nav from './Nav'
+import HelpModal from './HelpModal'
 import Pokedex from './pokedex/Pokedex'
 import UserStats from './userStats/UserStats'
-import Button from 'react-bootstrap/Button'
+import { FiMenu } from 'react-icons/fi'
+import { FaRegQuestionCircle } from 'react-icons/fa'
 
 const Header = ({userPokedex, userStats, handlePlayAgain, navIsVisible, pokedexIsVisible, userStatsIsVisible, showNav, showPokedex, showUserStats}) => {
 
+  const [showHelpModal, setShowHelpModal] = useState(true)
+
   return (
     <header className="main-header">
+        <button className="help-button" onClick={() => setShowHelpModal(true)}><FaRegQuestionCircle /></button>
         <img src={logo} alt="squordle logo" className="logo"/>
-        <Button variant="outline-dark" onClick={showNav}>Menu</Button>
+        <button onClick={showNav} className="menu-button"><FiMenu /></button>
+        <HelpModal showHelpModal={showHelpModal} setShowHelpModal={setShowHelpModal} />
         <Nav 
           navIsVisible={navIsVisible} 
           showPokedex={showPokedex} 

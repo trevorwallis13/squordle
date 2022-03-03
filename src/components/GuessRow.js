@@ -1,9 +1,10 @@
-import React from 'react'
+import { useMemo } from 'react'
 import GuessTile from './GuessTile'
 import { maxWordLength } from '../config'
 
 const GuessRow = ({currGuess, guessList, classNames, rowIndex, showWarning}) => {
 
+    useMemo(() => console.log(guessList), [guessList])
    const getTileVals = () => {
        if (rowIndex === guessList.length) {
            return currGuess.split('')

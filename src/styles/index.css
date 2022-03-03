@@ -44,7 +44,7 @@ body {
 }
 
 .logo {
-  width: 175px;
+  width: 150px;
 }
 
 .menu-container {
@@ -56,6 +56,18 @@ body {
   position: absolute;
   top: calc(100% + 3px);
   right: 3px;
+}
+
+.menu-button {
+  border: none;
+  background-color: inherit;
+  font-size: 2rem;
+}
+
+.help-button {
+  border: none;
+  background-color: inherit;
+  font-size: clamp(1rem, 5vw, 1.5rem);
 }
 
 .main-nav {
@@ -80,6 +92,7 @@ body {
   display: grid;
   grid-template-columns: 30px auto;
   align-items: center;
+  font-size: .75rem;
 }
 
 .right-container {
@@ -166,6 +179,20 @@ body {
   min-width: 1rem;
 }
 
+.how-to-modal .modal-dialog-centered {
+  max-width: 370px;
+}
+
+.how-to-modal .h4, .how-to-modal p, .how-to-modal h4 {
+  font-family: Arial;
+  text-align: left;
+}
+
+.how-to-modal strong {
+  font-family: Arial;
+  font-weight: 900;
+}
+
 .keyboard {
   display: grid;
   grid-template-columns: repeat(20, minmax(.5rem, 1.5rem));
@@ -173,7 +200,7 @@ body {
   gap: .25em;
   justify-content: center;
   width: 100%;
-  padding: 1em .5em;
+  padding: .5em;
 }
 
 .key {
@@ -224,7 +251,7 @@ body {
   gap: .2em;
   margin: 0 auto;
   width: 97.5%;
-  padding: 2em .5em;
+  padding: .5em;
   justify-content: center;
   font-size: clamp(.5rem, 3.5vw, 1.2rem);
 }
