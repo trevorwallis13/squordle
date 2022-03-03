@@ -9,7 +9,7 @@ import { FaRegQuestionCircle } from 'react-icons/fa'
 
 const Header = ({userPokedex, userStats, handlePlayAgain, navIsVisible, pokedexIsVisible, userStatsIsVisible, showNav, showPokedex, showUserStats}) => {
 
-  const [showHelpModal, setShowHelpModal] = useState(true)
+  const [showHelpModal, setShowHelpModal] = useState(false)
 
   return (
     <header className="main-header">
