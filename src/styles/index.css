@@ -34,13 +34,19 @@ body {
 }
 
 .main-header {
-  padding: 1em calc(.5em + 2%);
+  padding: 1em;
   border-bottom: 1px solid rgb(210, 210, 210);
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
   position: relative;
+}
+
+@media (max-width: 500px) {
+  .main-header {
+    padding: 1em, .5em;
+  }
 }
 
 .logo {
