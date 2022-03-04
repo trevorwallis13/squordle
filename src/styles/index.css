@@ -203,6 +203,10 @@ body {
   font-weight: 900;
 }
 
+.how-to-modal .guess-row {
+  grid-template-columns: repeat(12, 25px);
+}
+
 .keyboard {
   display: grid;
   grid-template-columns: repeat(20, minmax(.5rem, 1.5rem));

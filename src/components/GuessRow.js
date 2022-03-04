@@ -4,7 +4,6 @@ import { maxWordLength } from '../config'
 
 const GuessRow = ({currGuess, guessList, classNames, rowIndex, showWarning}) => {
 
-    useMemo(() => console.log(guessList), [guessList])
    const getTileVals = () => {
        if (rowIndex === guessList.length) {
            return currGuess.split('')
@@ -25,7 +24,15 @@ const GuessRow = ({currGuess, guessList, classNames, rowIndex, showWarning}) => 
     let tiles = []
 
     for(let i = 0; i<maxWordLength; i++) {
-        tiles.push(<GuessTile key={i+1} index={i+1} tileVal={tileVals[i]} tileClassName={tileClassNames[i]} isCurrentRow={isCurrentRow} isPreviousRow={isPreviousRow} showWarning={showWarning}/>)
+        tiles.push(<GuessTile 
+            key={i+1} 
+            index={i+1} 
+            tileVal={tileVals[i]} 
+            tileClassName={tileClassNames[i]} 
+            isCurrentRow={isCurrentRow} 
+            isPreviousRow={isPreviousRow} 
+            showWarning={showWarning}
+        />)
     }
 
     return (
