@@ -1,4 +1,3 @@
-import { useMemo } from 'react'
 import GuessTile from './GuessTile'
 import { maxWordLength } from '../config'
 
