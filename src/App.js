@@ -27,8 +27,8 @@ const App = () => {
   const [navIsVisible, setNavIsVisible] = useState(false)
   const [pokedexIsVisible, setPokedexIsVisible] = useState(false)
   const [userStatsIsVisible, setUserStatsIsVisible] = useState(false)
-
-
+  const [keyClasses, setKeyClasses] = useState({A: '', B: '', C: '', D: '', E: '', F: '', G: '', H: '', I: '', J: '', K: '', L: '', M: '', N: '', O: '', P: '', Q: '', R: '', S: '', T: '', U: '', V: '', W: '', X: '', Y: '', Z: ''})
+  
   useMemo(() => {
     if(guessList.length === numberOfGuesses && guessList[guessList.length-1] !== pokemon.name.toUpperCase()) {
       setGameStatus('lost')
@@ -68,13 +68,26 @@ const App = () => {
 
   // EVENT HANDLING HELPER FUNCTIONS
 
-  const getGuessClassNames = () => {
-    return currGuess.split('').map((letter, i) => {
+  const getGuessClassNames = (guess) => {
+    const guessLetters = guess.split('')
+    const guessClassNames = guessLetters.map((letter, i) => {
       const match = pokemon.name.toUpperCase().split('')
       if (letter === match[i]) return 'correct'
       if (match.indexOf(letter) === -1) return 'wrong'
       return 'wrong-spot'
     })
+    return [guessLetters, guessClassNames]
+  }
+
+  const getKeyClasses = (letters, classes) => {
+    const letterClasses = {}
+    
+    for (let i = 0; i<letters.length; i++) {
+      if (classes[i] === 'wrong-spot') continue
+      letterClasses[letters[i]] = classes[i]
+    }
+
+    return letterClasses
   }
 
   const removeFocus = () => {
@@ -104,9 +117,15 @@ const App = () => {
   
       const classNamesCopy = Array.from(classNames)
       const guessListCopy = Array.from(guessList)
+      const [guessLetters, guessClassNames] = getGuessClassNames(currGuess)
   
-      classNamesCopy.push(getGuessClassNames())
+      classNamesCopy.push(guessClassNames)
       guessListCopy.push(currGuess)
+      setKeyClasses(curr => {
+       return {...curr, ...getKeyClasses(guessLetters, guessClassNames)}
+        
+      })
+
    
       setClassNames(classNamesCopy)
       setGuessList(guessListCopy)
@@ -253,6 +272,7 @@ const App = () => {
         handleSubmit={handleSubmit}
         handleDelete={handleDelete}
         handleKeyClick={handleKeyClick}
+        keyClasses={keyClasses}
         focusRef={focusRef}
        />
     </div>
