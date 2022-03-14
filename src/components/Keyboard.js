@@ -4,7 +4,6 @@ import { IconContext } from 'react-icons'
 
 
 const Keyboard = ({handleKeyClick, handleDelete, handleSubmit, focusRef, keyClasses}) => {
-  console.log(keyClasses)
   return (
     <IconContext.Provider value={{ size: "clamp(1em, 5vw, 1.5em"}}>
       <div className="keyboard">
